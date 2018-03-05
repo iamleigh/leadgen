@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) or die( "Now you see me, now you don't... puff!!!" );
 function leadgen_form( $atts ) {
 
 	extract( shortcode_atts( array(
+		'styles'	=> true,
 		'name'		=> 'Name',
 		'phone'		=> 'Phone',
 		'email'		=> 'Email',
@@ -19,7 +20,13 @@ function leadgen_form( $atts ) {
 		'message'	=> 'Message'
 	), $atts ) );
 
-	return '<form>
+	if ( $styles === true ) {
+		$class = ' class="lgf-ui"';
+	} else {
+		$class = '';
+	}
+
+	return '<form' . $class . '>
 
 		<label for="lgf-name">' . $name . '</label>
 		<input type="text" id="lgf-name" name="name" maxlength="" />
