@@ -9,27 +9,35 @@
 
 defined( 'ABSPATH' ) or die( "Now you see me, now you don't... puff!!!" );
 
-function leadgen_form(){ ?>
+function leadgen_form( $atts ) {
 
-	<form>
+	extract( shortcode_atts( array(
+		'name'		=> 'Name',
+		'phone'		=> 'Phone',
+		'email'		=> 'Email',
+		'budget'	=> 'Desired Budget',
+		'message'	=> 'Message'
+	), $atts ) );
 
-		<label for="lgf-name">Name</label>
+	return '<form>
+
+		<label for="lgf-name">' . $name . '</label>
 		<input type="text" id="lgf-name" name="name" maxlength="" />
 
-		<label for="lgf-phone">Phone Number</label>
+		<label for="lgf-phone">' . $phone . '</label>
 		<input type="number" id="lgf-phone" name="phone" maxlength="" />
 
-		<label for="lgf-email">Phone Number</label>
+		<label for="lgf-email">' . $email . '</label>
 		<input type="email" id="lgf-email" name="email" maxlength="" />
 
-		<label for="lgf-budget">Desired Budget</label>
+		<label for="lgf-budget">' . $budget . '</label>
 		<input type="number" id="lgf-budget" name="budget" maxlength="" rows="" cols="" />
 
-		<label for="lgf-message">Message</label>
+		<label for="lgf-message">' . $message . '</label>
 		<textarea id="lgf-message" maxlength=""></textarea>
 
-	</form>
+	</form>';
 
-<?php }
+}
 
 add_shortcode( "leadgen", "leadgen_form" );
