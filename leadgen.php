@@ -17,7 +17,8 @@ function leadgen_form( $atts ) {
 		'phone'		=> 'Phone',
 		'email'		=> 'Email',
 		'budget'	=> 'Desired Budget',
-		'message'	=> 'Message'
+		'message'	=> 'Message',
+		'submit'	=> 'Submit'
 	), $atts ) );
 
 	if ( $styles === true ) {
@@ -42,6 +43,8 @@ function leadgen_form( $atts ) {
 
 		<label for="lgf-message">' . $message . '</label>
 		<textarea id="lgf-message" maxlength=""></textarea>
+
+		<button>' . $submit . '</button>
 
 	</form>';
 
