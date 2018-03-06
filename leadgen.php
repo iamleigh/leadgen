@@ -229,7 +229,7 @@ function leadgen_load_styles() {
 	
 	$plugin_url = plugin_dir_url( __FILE__ );
 	
-	wp_enqueue_style( 'style1', $plugin_url . 'css/leadgen.css' );
+	wp_enqueue_style( 'style1', $plugin_url . 'assets/css/leadgen.css' );
 	
 }
 
