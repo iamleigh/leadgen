@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					'assets/css/leadgen.min.css': ['assets/css/leadgen.css']
+					'assets/css/leadgen.css': ['assets/css/leadgen.css']
 				}
 			}
 		},
