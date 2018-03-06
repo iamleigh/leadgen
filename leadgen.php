@@ -95,13 +95,6 @@ function leadgen_customer_info_show( $customer_info ) {
 			<td><input type="number" size="80" name="leadgen_customer_budget" value="<?php echo $budget; ?>" /></td>
 			
 		</tr>
-
-		<tr>
-			
-			<td>Message:</td>
-			<td><input type="text" size="80" name="leadgen_customer_message" value="<?php echo $message; ?>" /></td>
-			
-		</tr>
 		
 	</table>
 
@@ -121,10 +114,6 @@ function leadgen_customer_info_add( $customer_id, $customer_info ) {
 
 		if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
 			update_post_meta( $customer_id, 'budget', $_POST['leadgen_customer_budget'] );
-		}
-
-		if ( isset( $_POST['leadgen_customer_message'] ) && $_POST['leadgen_customer_message'] != '' ) {
-			update_post_meta( $customer_id, 'message', $_POST['leadgen_customer_message'] );
 		}
 
 	}
