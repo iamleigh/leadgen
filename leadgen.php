@@ -4,11 +4,51 @@
  * Description:	Collect customer data and build customer profiles inside of your WordPress Dashboard.
  * Version:		1.0
  * Author:		Leighton Sapir
- * Author URI:	http://iamleigh.com
+ * Author URI:	http://iamleigh.com/
+ * License:		MIT
  */
 
 defined( 'ABSPATH' ) or die( "Now you see me, now you don't... puff!!!" );
 
+// CUSTOMER CPT
+function leadgen_customers() {
+
+	$labels		= array(
+		'name'					=> 'Customers',
+		'singular_name'			=> 'Customer',
+		'add_new'				=> 'Add New',
+		'add_new_item'			=> 'Add New Customer',
+		'edit_item'				=> 'Edit Customer',
+		'new_item'				=> 'New Customer',
+		'view_item'				=> 'View Customer',
+		'view_items'			=> 'View Customers',
+		'search_items'			=> 'Search Customers',
+		'not_found'				=> 'No customers found',
+		'not_found_in_trash'	=> 'No customers found in trash'
+	);
+
+	$supports	= array(
+		'title'
+	);
+
+	$args		= array(
+		'labels'			=> $labels,
+		'public'			=> true,
+		'menu_icon'			=> null,
+		'rewrite'			=> array( 'slug' => 'customer' ),
+		'capability_type'	=> 'post',
+		'has_archive'		=> false,
+		'menu_position'		=> '15',
+		'supports'			=> $supports,
+	);
+
+	register_post_type( 'customer', $args );
+
+}
+
+add_action( 'init', 'leadgen_customers' );
+
+// SHORTCODE
 function leadgen_form( $atts ) {
 
 	extract( shortcode_atts( array(
