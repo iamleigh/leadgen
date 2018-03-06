@@ -139,28 +139,87 @@ function leadgen_form( $atts ) {
 		$class = ' class="lgf-ui"';
 	} else {
 		$class = '';
+	} ?>
+
+	<div id="leadgen-form">
+		
+		<form id="new_post" name="new_post" method="post" action="">
+
+			<p><label for="lgf-title"><?php echo $name; ?></label><br />
+			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" required />
+			</p>
+
+			<p><label for="lgf-phone"><?php echo $phone; ?></label><br />
+			<input type="tel" id="lgf-phone" value="" tabindex="1" size="20" name="leadgen_customer_phone" />
+			</p>
+
+			<p><label for="lgf-email"><?php echo $email; ?></label><br />
+			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" required />
+			</p>
+
+			<p><label for="lgf-budget"><?php echo $budget; ?></label><br />
+			<input type="number" id="lgf-budget" value="" tabindex="1" size="20" name="leadgen_customer_budget" />
+			</p>
+			
+			<p><label for="lgf-description"><?php echo $message; ?></label><br />
+			<textarea id="lgf-description" tabindex="3" name="description" cols="50" rows="6"></textarea>
+			</p>
+			
+			<p><input type="submit" value="<?php echo $submit; ?>" tabindex="6" id="submit" name="submit" /></p>
+			
+			<input type="hidden" name="action" value="new_post" />
+			<?php wp_nonce_field( 'new-post' ); ?>
+
+		</form>
+		
+	</div>
+
+	<?php
+	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "new_post" ) {
+		
+		if ( isset( $_POST['title'] ) ) {
+			$title =  $_POST['title'];
+		} else {
+			echo '<p>Please, enter customer name.</p>';
+		}
+
+		if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
+			$phone = $_POST['leadgen_customer_phone'];
+		} else {
+			echo '<p>Please, enter a valid number.</p>';
+		}
+
+		if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
+			$email = $_POST['leadgen_customer_email'];
+		} else {
+			echo '<p>Please, enter a valid email.</p>';
+		}
+
+		if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
+			$budget = $_POST['leadgen_customer_budget'];
+		} else {
+			echo '<p>Please, enter a valid budget.</p>';
+		}
+		
+		if ( isset( $_POST['description'] ) ) {
+			$description = $_POST['description'];
+		}
+		
+		// Add the content of the form to $post as an array
+		$new_post = array(
+			'post_title'				=> $title,
+			'post_content'				=> $description,
+			'leadgen_customer_phone'	=> $phone,
+			'leadgen_customer_email'	=> $email,
+			'leadgen_customer_budget'	=> $budget,
+			'post_status'				=> 'publish',
+			'post_type'					=> 'customers'
+		);
+		
+		// Save the new post
+		$pid = wp_insert_post( $new_post );
+		
 	}
-
-	return '<form' . $class . '>
-
-		<label for="lgf-name">' . $name . '</label>
-		<input type="text" id="lgf-name" name="name" maxlength="" />
-
-		<label for="lgf-phone">' . $phone . '</label>
-		<input type="number" id="lgf-phone" name="phone" maxlength="" />
-
-		<label for="lgf-email">' . $email . '</label>
-		<input type="email" id="lgf-email" name="email" maxlength="" />
-
-		<label for="lgf-budget">' . $budget . '</label>
-		<input type="number" id="lgf-budget" name="budget" maxlength="" rows="" cols="" />
-
-		<label for="lgf-message">' . $message . '</label>
-		<textarea id="lgf-message" maxlength=""></textarea>
-
-		<button>' . $submit . '</button>
-
-	</form>';
 
 }
 
