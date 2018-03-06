@@ -136,7 +136,7 @@ function leadgen_form( $atts ) {
 	), $atts ) );
 
 	if ( $styles === true ) {
-		$class = ' class="lgf-ui"';
+		$class = ' class="leadgen-ui"';
 	} else {
 		$class = '';
 	} ?>
