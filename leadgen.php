@@ -143,7 +143,7 @@ function leadgen_form( $atts ) {
 
 	<div id="leadgen-form">
 		
-		<form id="new_post" name="new_post" method="post" action="">
+		<form id="new_post"<?php echo $class; ?> name="new_post" method="post" action="">
 
 			<p><label for="lgf-title"><?php echo $name; ?></label><br />
 			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" required />
