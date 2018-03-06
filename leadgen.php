@@ -145,23 +145,23 @@ function leadgen_form( $atts ) {
 		
 		<form id="new_post"<?php echo $class; ?> name="new_post" method="post" action="">
 
-			<p><label for="lgf-title"><?php echo $name; ?></label><br />
+			<p><label for="lgf-title"><?php echo $name; ?></label>
 			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" required />
 			</p>
 
-			<p><label for="lgf-phone"><?php echo $phone; ?></label><br />
+			<p><label for="lgf-phone"><?php echo $phone; ?></label>
 			<input type="tel" id="lgf-phone" value="" tabindex="1" size="20" name="leadgen_customer_phone" />
 			</p>
 
-			<p><label for="lgf-email"><?php echo $email; ?></label><br />
+			<p><label for="lgf-email"><?php echo $email; ?></label>
 			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" required />
 			</p>
 
-			<p><label for="lgf-budget"><?php echo $budget; ?></label><br />
+			<p><label for="lgf-budget"><?php echo $budget; ?></label>
 			<input type="number" id="lgf-budget" value="" tabindex="1" size="20" name="leadgen_customer_budget" />
 			</p>
 			
-			<p><label for="lgf-description"><?php echo $message; ?></label><br />
+			<p><label for="lgf-description"><?php echo $message; ?></label>
 			<textarea id="lgf-description" tabindex="3" name="description" cols="50" rows="6"></textarea>
 			</p>
 			
