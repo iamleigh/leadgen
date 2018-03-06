@@ -42,11 +42,94 @@ function leadgen_customers() {
 		'supports'			=> $supports,
 	);
 
-	register_post_type( 'customer', $args );
+	register_post_type( 'customers', $args );
 
 }
 
 add_action( 'init', 'leadgen_customers' );
+
+// CUSTOMER META BOX
+function leadgen_customer_info() {
+
+	add_meta_box(
+		'leadgen_customer_info_meta',
+		'Customer Info',
+		'leadgen_customer_info_show',
+		'customers',
+		'normal',
+		'high'
+	);
+
+}
+
+add_action( 'init', 'leadgen_customer_info' );
+
+function leadgen_customer_info_show( $customer_info ) {
+
+	$phone		= esc_html( get_post_meta( $customer_info->ID, 'phone', true ) );
+	$email		= esc_html( get_post_meta( $customer_info->ID, 'email', true ) );
+	$budget		= esc_html( get_post_meta( $customer_info->ID, 'budget', true ) );
+	$message	= esc_html( get_post_meta( $customer_info->ID, 'message', true ) ); ?>
+
+	<table>
+		
+		<tr>
+			
+			<td>Phone:</td>
+			<td><input type="number" size="80" name="leadgen_customer_phone" value="<?php echo $phone; ?>" /></td>
+			
+		</tr>
+
+		<tr>
+			
+			<td>Email:</td>
+			<td><input type="email" size="80" name="leadgen_customer_email" value="<?php echo $email; ?>" /></td>
+			
+		</tr>
+
+		<tr>
+			
+			<td>Desired Budget:</td>
+			<td><input type="number" size="80" name="leadgen_customer_budget" value="<?php echo $budget; ?>" /></td>
+			
+		</tr>
+
+		<tr>
+			
+			<td>Message:</td>
+			<td><input type="text" size="80" name="leadgen_customer_message" value="<?php echo $message; ?>" /></td>
+			
+		</tr>
+		
+	</table>
+
+<?php }
+
+function leadgen_customer_info_add( $customer_id, $customer_info ) {
+
+	if ( $customer_info->post_type == 'customers' ) {
+
+		if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
+			update_post_meta( $customer_id, 'phone', $_POST['leadgen_customer_phone'] );
+		}
+
+		if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
+			update_post_meta( $customer_id, 'email', $_POST['leadgen_customer_email'] );
+		}
+
+		if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
+			update_post_meta( $customer_id, 'budget', $_POST['leadgen_customer_budget'] );
+		}
+
+		if ( isset( $_POST['leadgen_customer_message'] ) && $_POST['leadgen_customer_message'] != '' ) {
+			update_post_meta( $customer_id, 'message', $_POST['leadgen_customer_message'] );
+		}
+
+	}
+
+}
+
+add_action( 'save_post', 'leadgen_customer_info_add', 10, 2 );
 
 // SHORTCODE
 function leadgen_form( $atts ) {
