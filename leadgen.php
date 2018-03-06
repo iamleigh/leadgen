@@ -224,3 +224,13 @@ function leadgen_form( $atts ) {
 }
 
 add_shortcode( "leadgen", "leadgen_form" );
+
+function leadgen_load_styles() {
+	
+	$plugin_url = plugin_dir_url( __FILE__ );
+	
+	wp_enqueue_style( 'style1', $plugin_url . 'css/leadgen.css' );
+	
+}
+
+add_action( 'wp_enqueue_scripts', 'leadgen_load_styles' );
