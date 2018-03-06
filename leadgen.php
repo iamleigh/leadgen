@@ -28,7 +28,9 @@ function leadgen_customers() {
 	);
 
 	$supports	= array(
-		'title'
+		'title',
+		'editor'
+
 	);
 
 	$args		= array(
