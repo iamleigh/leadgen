@@ -168,7 +168,7 @@ function leadgen_form( $atts ) {
 			<p><input type="submit" value="<?php echo $submit; ?>" tabindex="6" id="submit" name="submit" /></p>
 			
 			<input type="hidden" name="action" value="leadgen_new_customer" />
-			<?php wp_nonce_field( 'leadgen-new-post', 'leadgen_nonce' ); ?>
+			<?php wp_nonce_field( 'leadgen-new-client', 'leadgen_nonce' ); ?>
 
 		</form>
 		
@@ -177,7 +177,7 @@ function leadgen_form( $atts ) {
 	<?php
 	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "leadgen_new_customer" ) {
 
-		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-post' ) ) {
+		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-client' ) ) {
 			
 			print 'Sorry, your nonce did not verify.';
 			
