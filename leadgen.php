@@ -211,28 +211,28 @@ function leadgen_form( $atts ) {
 			<p><label for="lgf-title"><?php echo $name; ?></label>
 			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" />
 			<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
-				<label id="lgf-title"><?php echo $errors['title']; ?></label>
+				<label id="lgf-title" class="leadgen-label--error"><?php echo $errors['title']; ?></label>
 			<?php } ?>
 			</p>
 
 			<p><label for="lgf-phone"><?php echo $phone; ?></label>
 			<input type="tel" id="lgf-phone" value="" tabindex="1" size="20" name="leadgen_customer_phone" />
 			<?php if ( isset( $errors['leadgen_customer_phone'] ) && !empty( $errors['leadgen_customer_phone'] ) ) { ?>
-				<label id="lgf-phone"><?php echo $errors['leadgen_customer_phone']; ?></label>
+				<label id="lgf-phone" class="leadgen-label--error"><?php echo $errors['leadgen_customer_phone']; ?></label>
 			<?php } ?>
 			</p>
 
 			<p><label for="lgf-email"><?php echo $email; ?></label>
 			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" />
 			<?php if ( isset( $errors['leadgen_customer_email'] ) && !empty( $errors['leadgen_customer_email'] ) ) { ?>
-				<label id="lgf-email"><?php echo $errors['leadgen_customer_email']; ?></label>
+				<label id="lgf-email" class="leadgen-label--error"><?php echo $errors['leadgen_customer_email']; ?></label>
 			<?php } ?>
 			</p>
 
 			<p><label for="lgf-budget"><?php echo $budget; ?></label>
 			<input type="number" id="lgf-budget" value="" tabindex="1" size="20" name="leadgen_customer_budget" />
 			<?php if ( isset( $errors['leadgen_customer_budget'] ) && !empty( $errors['leadgen_customer_budget'] ) ) { ?>
-				<label id="lgf-budget"><?php echo $errors['leadgen_customer_budget']; ?></label>
+				<label id="lgf-budget" class="leadgen-label--error"><?php echo $errors['leadgen_customer_budget']; ?></label>
 			<?php } ?>
 			</p>
 			
