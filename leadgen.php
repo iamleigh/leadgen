@@ -125,6 +125,8 @@ add_action( 'save_post', 'leadgen_customer_info_add', 10, 2 );
 // SHORTCODE
 function leadgen_form( $atts ) {
 
+	$errors = array();
+
 	extract( shortcode_atts( array(
 		'styles'	=> true,
 		'name'		=> 'Name',
@@ -134,6 +136,67 @@ function leadgen_form( $atts ) {
 		'message'	=> 'Message',
 		'submit'	=> 'Submit'
 	), $atts ) );
+
+	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "leadgen_new_customer" ) {
+
+		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-client' ) ) {
+			
+			print 'Sorry, your nonce did not verify.';
+			
+			exit;
+		
+		} else {
+			
+			$customer_name = $customer_phone = $customer_email = $customer_budget = $customer_message = '';
+			
+			if ( isset( $_POST['title'] ) && $_POST['title'] != '' ) {
+				$customer_name =  $_POST['title'];
+			} else {
+				$errors['title'] = '"' . $name . '" is required';
+			}
+
+			if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
+				$customer_phone = $_POST['leadgen_customer_phone'];
+			} else {
+				$errors['leadgen_customer_phone'] = '"' . $phone . '" is required';
+			}
+
+			if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
+				$customer_email = $_POST['leadgen_customer_email'];
+			} else {
+				$errors['leadgen_customer_email'] = '"' . $email . '" is required';
+			}
+
+			if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
+				$customer_budget = $_POST['leadgen_customer_budget'];
+			} else {
+				$errors['leadgen_customer_budget'] = '"' . $budget . '" is required';
+			}
+			
+			if ( isset( $_POST['description'] ) ) {
+				$customer_message = $_POST['description'];
+			}
+
+			if ( !empty( $customer_name ) && !empty( $customer_phone ) && !empty( $customer_email ) && !empty( $customer_budget ) ) {
+
+				// Add the content of the form to $post as an array
+				$new_client = array(
+					'post_title'				=> $customer_name,
+					'post_content'				=> $customer_message,
+					'leadgen_customer_phone'	=> $customer_phone,
+					'leadgen_customer_email'	=> $customer_email,
+					'leadgen_customer_budget'	=> $customer_budget,
+					'post_status'				=> 'publish',
+					'post_type'					=> 'customers'
+				);
+
+				// Save the new post
+				$pid = wp_insert_post( $new_client );
+			}
+		
+		}
+		
+	}
 
 	if ( $styles === true ) {
 		$class = ' class="leadgen-ui"';
@@ -147,18 +210,30 @@ function leadgen_form( $atts ) {
 
 			<p><label for="lgf-title"><?php echo $name; ?></label>
 			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" />
+			<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
+				<label id="lgf-title"><?php echo $errors['title']; ?></label>
+			<?php } ?>
 			</p>
 
 			<p><label for="lgf-phone"><?php echo $phone; ?></label>
 			<input type="tel" id="lgf-phone" value="" tabindex="1" size="20" name="leadgen_customer_phone" />
+			<?php if ( isset( $errors['leadgen_customer_phone'] ) && !empty( $errors['leadgen_customer_phone'] ) ) { ?>
+				<label id="lgf-phone"><?php echo $errors['leadgen_customer_phone']; ?></label>
+			<?php } ?>
 			</p>
 
 			<p><label for="lgf-email"><?php echo $email; ?></label>
 			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" />
+			<?php if ( isset( $errors['leadgen_customer_email'] ) && !empty( $errors['leadgen_customer_email'] ) ) { ?>
+				<label id="lgf-email"><?php echo $errors['leadgen_customer_email']; ?></label>
+			<?php } ?>
 			</p>
 
 			<p><label for="lgf-budget"><?php echo $budget; ?></label>
 			<input type="number" id="lgf-budget" value="" tabindex="1" size="20" name="leadgen_customer_budget" />
+			<?php if ( isset( $errors['leadgen_customer_budget'] ) && !empty( $errors['leadgen_customer_budget'] ) ) { ?>
+				<label id="lgf-budget"><?php echo $errors['leadgen_customer_budget']; ?></label>
+			<?php } ?>
 			</p>
 			
 			<p><label for="lgf-description"><?php echo $message; ?></label>
@@ -174,69 +249,7 @@ function leadgen_form( $atts ) {
 		
 	</div>
 
-	<?php
-	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "leadgen_new_customer" ) {
-
-		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-client' ) ) {
-			
-			print 'Sorry, your nonce did not verify.';
-			
-			exit;
-		
-		} else {
-			
-			$customer = $phone = $email = $budget = $message = '';
-			
-			if ( isset( $_POST['title'] ) && $_POST['title'] != '' ) {
-				$customer =  $_POST['title'];
-			} else {
-				echo '<p>Please, enter your full name.</p>';
-			}
-
-			if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
-				$phone = $_POST['leadgen_customer_phone'];
-			} else {
-				echo '<p>Please, enter a valid number.</p>';
-			}
-
-			if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
-				$email = $_POST['leadgen_customer_email'];
-			} else {
-				echo '<p>Please, enter a valid email.</p>';
-			}
-
-			if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
-				$budget = $_POST['leadgen_customer_budget'];
-			} else {
-				echo '<p>Please, enter a valid budget.</p>';
-			}
-			
-			if ( isset( $_POST['description'] ) ) {
-				$message = $_POST['description'];
-			}
-
-			if ( !empty( $customer ) && !empty( $phone ) && !empty( $email ) && !empty( $budget ) ) {
-
-				// Add the content of the form to $post as an array
-				$new_client = array(
-					'post_title'				=> $customer,
-					'post_content'				=> $message,
-					'leadgen_customer_phone'	=> $phone,
-					'leadgen_customer_email'	=> $email,
-					'leadgen_customer_budget'	=> $budget,
-					'post_status'				=> 'publish',
-					'post_type'					=> 'customers'
-				);
-
-				// Save the new post
-				$pid = wp_insert_post( $new_client );
-			}
-		
-		}
-		
-	}
-
-}
+<?php }
 
 add_shortcode( "leadgen", "leadgen_form" );
 
