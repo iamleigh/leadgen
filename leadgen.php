@@ -143,10 +143,10 @@ function leadgen_form( $atts ) {
 
 	<div id="leadgen-form">
 		
-		<form id="new_post"<?php echo $class; ?> name="new_post" method="post" action="">
+		<form id="leadgen_new_customer"<?php echo $class; ?> name="leadgen_new_customer" method="post" action="">
 
 			<p><label for="lgf-title"><?php echo $name; ?></label>
-			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" required />
+			<input type="text" id="lgf-title" value="" tabindex="1" size="20" name="title" />
 			</p>
 
 			<p><label for="lgf-phone"><?php echo $phone; ?></label>
@@ -154,7 +154,7 @@ function leadgen_form( $atts ) {
 			</p>
 
 			<p><label for="lgf-email"><?php echo $email; ?></label>
-			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" required />
+			<input type="email" id="lgf-email" value="" tabindex="1" size="20" name="leadgen_customer_email" />
 			</p>
 
 			<p><label for="lgf-budget"><?php echo $budget; ?></label>
@@ -167,57 +167,72 @@ function leadgen_form( $atts ) {
 			
 			<p><input type="submit" value="<?php echo $submit; ?>" tabindex="6" id="submit" name="submit" /></p>
 			
-			<input type="hidden" name="action" value="new_post" />
-			<?php wp_nonce_field( 'new-post' ); ?>
+			<input type="hidden" name="action" value="leadgen_new_customer" />
+			<?php wp_nonce_field( 'leadgen-new-post', 'leadgen_nonce' ); ?>
 
 		</form>
 		
 	</div>
 
 	<?php
-	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "new_post" ) {
-		
-		if ( isset( $_POST['title'] ) ) {
-			$title =  $_POST['title'];
-		} else {
-			echo '<p>Please, enter customer name.</p>';
-		}
+	if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "leadgen_new_customer" ) {
 
-		if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
-			$phone = $_POST['leadgen_customer_phone'];
+		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-post' ) ) {
+			
+			print 'Sorry, your nonce did not verify.';
+			
+			exit;
+		
 		} else {
-			echo '<p>Please, enter a valid number.</p>';
-		}
+			
+			$title = $phone = $email = $budget = $description = '';
+			
+			if ( isset( $_POST['title'] ) && $_POST['title'] != '' ) {
+				$title =  $_POST['title'];
+			} else {
+				echo '<p>Please, enter your full name.</p>';
+			}
 
-		if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
-			$email = $_POST['leadgen_customer_email'];
-		} else {
-			echo '<p>Please, enter a valid email.</p>';
-		}
+			if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] != '' ) {
+				$phone = $_POST['leadgen_customer_phone'];
+			} else {
+				echo '<p>Please, enter a valid number.</p>';
+			}
 
-		if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
-			$budget = $_POST['leadgen_customer_budget'];
-		} else {
-			echo '<p>Please, enter a valid budget.</p>';
+			if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] != '' ) {
+				$email = $_POST['leadgen_customer_email'];
+			} else {
+				echo '<p>Please, enter a valid email.</p>';
+			}
+
+			if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] != '' ) {
+				$budget = $_POST['leadgen_customer_budget'];
+			} else {
+				echo '<p>Please, enter a valid budget.</p>';
+			}
+			
+			if ( isset( $_POST['description'] ) ) {
+				$description = $_POST['description'];
+			}
+
+			if ( !empty( $title ) && !empty( $phone ) && !empty( $email ) && !empty( $budget ) ) {
+
+				// Add the content of the form to $post as an array
+				$new_client = array(
+					'post_title'				=> $title,
+					'post_content'				=> $description,
+					'leadgen_customer_phone'	=> $phone,
+					'leadgen_customer_email'	=> $email,
+					'leadgen_customer_budget'	=> $budget,
+					'post_status'				=> 'publish',
+					'post_type'					=> 'customers'
+				);
+
+				// Save the new post
+				$pid = wp_insert_post( $new_client );
+			}
+		
 		}
-		
-		if ( isset( $_POST['description'] ) ) {
-			$description = $_POST['description'];
-		}
-		
-		// Add the content of the form to $post as an array
-		$new_post = array(
-			'post_title'				=> $title,
-			'post_content'				=> $description,
-			'leadgen_customer_phone'	=> $phone,
-			'leadgen_customer_email'	=> $email,
-			'leadgen_customer_budget'	=> $budget,
-			'post_status'				=> 'publish',
-			'post_type'					=> 'customers'
-		);
-		
-		// Save the new post
-		$pid = wp_insert_post( $new_post );
 		
 	}
 
