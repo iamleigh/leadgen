@@ -1,6 +1,9 @@
 // Modules
 @import "modules/modules";
 
+// Basics
+@import "partials/basics/screen-reader";
+
 .leadgen-ui {
 	padding: 20px;
 	background: #F1F1F1;
