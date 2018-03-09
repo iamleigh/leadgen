@@ -185,10 +185,10 @@ function leadgen_form( $atts ) {
 		
 		} else {
 			
-			$title = $phone = $email = $budget = $description = '';
+			$customer = $phone = $email = $budget = $message = '';
 			
 			if ( isset( $_POST['title'] ) && $_POST['title'] != '' ) {
-				$title =  $_POST['title'];
+				$customer =  $_POST['title'];
 			} else {
 				echo '<p>Please, enter your full name.</p>';
 			}
@@ -212,15 +212,15 @@ function leadgen_form( $atts ) {
 			}
 			
 			if ( isset( $_POST['description'] ) ) {
-				$description = $_POST['description'];
+				$message = $_POST['description'];
 			}
 
-			if ( !empty( $title ) && !empty( $phone ) && !empty( $email ) && !empty( $budget ) ) {
+			if ( !empty( $customer ) && !empty( $phone ) && !empty( $email ) && !empty( $budget ) ) {
 
 				// Add the content of the form to $post as an array
 				$new_client = array(
-					'post_title'				=> $title,
-					'post_content'				=> $description,
+					'post_title'				=> $customer,
+					'post_content'				=> $message,
 					'leadgen_customer_phone'	=> $phone,
 					'leadgen_customer_email'	=> $email,
 					'leadgen_customer_budget'	=> $budget,
