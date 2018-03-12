@@ -160,7 +160,7 @@ function leadgen_form( $atts ) {
 				( empty( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] === '' ) ||
 				( empty( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] === '' )
 			) {
-				$errors['form'] = 'Something went wrong with your form. Please, verify and try again.';
+				$errors['form'] = 'Something went wrong. Please, verify and try again.';
 				$errors['class'] = 'leadgen-has_error';
 			}
 			
