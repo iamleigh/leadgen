@@ -1,0 +1,13 @@
+.leadgen-form {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid $color-silver--dark;
+	border-radius: 2px;
+	background: $color-white;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+
+	@include screen("small") {
+		padding: 30px;
+	}
+}
