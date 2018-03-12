@@ -1,0 +1,44 @@
+.leadgen-ui {
+
+    * {
+		box-sizing: border-box;
+		font-variant-ligatures: none;
+        -webkit-font-variant-ligatures: none;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        font-smoothing: antialiased;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    }
+
+	.leadgen-title {
+		margin: 20px 0;
+		color: $color-gray--dark;
+		font: 400 22px/35px $font;
+		letter-spacing: -0.6px;
+		text-transform: none;
+		text-align: center;
+
+		&:first-child {
+			margin-top: 0;
+
+			@include screen("small") {
+				margin-top: 0;
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+
+			@include screen("small") {
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			margin: 30px 0;
+			font-size: 30px;
+			line-height: 40px;
+		}
+	}
+}
