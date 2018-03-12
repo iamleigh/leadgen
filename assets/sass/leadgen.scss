@@ -2,9 +2,13 @@
 @import "modules/modules";
 
 // Basics
+@import "partials/basics/typography";
+@import "partials/basics/label";
 @import "partials/basics/screen-reader";
 
-.leadgen-ui {
-	padding: 20px;
-	background: #F1F1F1;
-}
+// Global
+@import "partials/global/form";
+@import "partials/global/field";
+@import "partials/global/input";
+@import "partials/global/textarea";
+@import "partials/global/button";
