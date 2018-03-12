@@ -125,7 +125,8 @@ add_action( 'save_post', 'leadgen_customer_info_add', 10, 2 );
 // SHORTCODE
 function leadgen_form( $atts ) {
 
-	$errors = array();
+	$errors = array(); // array to hold validation errors
+	$data	= array(); // array to pass back data
 
 	extract( shortcode_atts( array(
 		'styles'		=> true,
@@ -156,7 +157,7 @@ function leadgen_form( $atts ) {
 		} else {
 			
 			$customer_name = $customer_phone = $customer_email = $customer_budget = $customer_message = '';
-
+			
 			if (
 				( empty( $_POST['title'] ) && $_POST['title'] === '' ) ||
 				( empty( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] === '' ) ||
@@ -211,6 +212,17 @@ function leadgen_form( $atts ) {
 				// Save the new post
 				$pid = wp_insert_post( $new_client );
 			}
+
+			// return a response
+			if ( !empty( $errors ) ) {
+				$data['success']	= false;
+				$data['errors']		= $errors;
+			} else {
+				$data['success']	= true;
+				$data['message']	= 'Success!';
+			}
+
+			echo json_encode( $data );
 		
 		}
 		
@@ -316,8 +328,18 @@ function leadgen_load_styles() {
 	
 	$plugin_url = plugin_dir_url( __FILE__ );
 	
-	wp_enqueue_style( 'style1', $plugin_url . 'assets/css/leadgen.css' );
+	wp_enqueue_style( 'leadgen', $plugin_url . 'assets/css/leadgen.css' );
 	
 }
 
 add_action( 'wp_enqueue_scripts', 'leadgen_load_styles' );
+
+function leadgen_load_scripts() {
+
+	$plugin_url = plugin_dir_url( __FILE__ );
+
+	wp_enqueue_script( 'leadgen', $plugin_url . 'assets/js/leadgen.js', false );
+	
+}
+
+add_action( 'wp_enqueue_scripts', 'leadgen_load_scripts' );
