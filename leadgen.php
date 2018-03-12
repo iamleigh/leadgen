@@ -139,8 +139,8 @@ function leadgen_form( $atts ) {
 		'budget'		=> 'Desired Budget',
 		'budget_max'	=> '4',
 		'message'		=> 'Message',
-		'message_rows'	=> '100',
-		'message_cols'	=> '6',
+		'message_cols'	=> '100',
+		'message_rows'	=> '6',
 		'submit'		=> 'Submit'
 	), $atts ) );
 
