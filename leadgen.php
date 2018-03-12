@@ -170,25 +170,25 @@ function leadgen_form( $atts ) {
 			if ( isset( $_POST['title'] ) && $_POST['title'] !== '' ) {
 				$customer_name =  $_POST['title'];
 			} else {
-				$errors['title'] = '"' . $name . '" is required';
+				$errors['title'] = '"' . $name . '" is required.';
 			}
 
 			if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] !== '' ) {
 				$customer_phone = $_POST['leadgen_customer_phone'];
 			} else {
-				$errors['leadgen_customer_phone'] = '"' . $phone . '" is required';
+				$errors['leadgen_customer_phone'] = '"' . $phone . '" is required.';
 			}
 
 			if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] !== '' ) {
 				$customer_email = $_POST['leadgen_customer_email'];
 			} else {
-				$errors['leadgen_customer_email'] = '"' . $email . '" is required';
+				$errors['leadgen_customer_email'] = '"' . $email . '" is required.';
 			}
 
 			if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] !== '' ) {
 				$customer_budget = $_POST['leadgen_customer_budget'];
 			} else {
-				$errors['leadgen_customer_budget'] = '"' . $budget . '" is required';
+				$errors['leadgen_customer_budget'] = '"' . $budget . '" is required.';
 			}
 			
 			if ( isset( $_POST['description'] ) ) {
