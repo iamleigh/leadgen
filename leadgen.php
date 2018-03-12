@@ -291,9 +291,9 @@ function leadgen_form( $atts ) {
 
 			</div>
 			
-			<div class="leadgen-field">
+			<div class="leadgen-field--button">
 				
-				<input type="submit" value="<?php echo $submit; ?>" tabindex="6" id="submit" name="submit" />
+				<button id="submit" class="leadgen-button" name="submit"><?php echo $submit; ?></button>
 				
 			</div>
 			
