@@ -1,0 +1,80 @@
+.leadgen-ui {
+
+    .leadgen-label {
+        cursor: text;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: $color-gray--light;
+        font: 400 13px/22px $font;
+        letter-spacing: -0.25px;
+
+        &--info,
+        &--notice,
+        &--success,
+        &--loading {
+            height: auto;
+            opacity: 1;
+            cursor: default;
+            display: block;
+            position: relative;
+            margin: 15px 0;
+            padding: 14px 15px 12px;
+            border-radius: 3px;
+            color: $color-gray--light;
+            font: 400 13px/20px $font;
+            letter-spacing: 0;
+            transition: height 0.3s linear, opacity 0.3s ease;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &--info {
+            background: #F8F8F8;
+
+            &:before {
+                content: "\49";
+                color: #4DA6DE;
+            }
+        }
+
+        &--error {
+			display: block;
+			margin: 5px 0 0;
+			padding: 0;
+			border: 0;
+			color: $color-red;
+			font: 400 12px/20px $font;
+			letter-spacing: 0;
+			
+			@include screen("small") {
+				text-align: right;
+			}
+        }
+
+        &--notice {
+            background: #FFF4D2;
+            color: $color-gray--dark;
+        }
+
+        &--success {
+            background: $color-green;
+            color: $color-white;
+
+            strong {
+                color: $color-white;
+            }
+        }
+
+        &--loading {
+            background: $color-blue--soft;
+        }
+    }
+}
