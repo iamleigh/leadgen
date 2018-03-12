@@ -209,7 +209,7 @@ function leadgen_form( $atts ) {
 	}
 
 	if ( $styles === true ) {
-		$class = ' class="leadgen-ui"';
+		$class = ' class="leadgen-ui leadgen-form"';
 	} else {
 		$class = '';
 	} ?>
@@ -229,13 +229,13 @@ function leadgen_form( $atts ) {
 
 			<?php } ?>
 
-			<h1><?php echo $title; ?></h1>
+			<h1 class="leadgen-title"><?php echo $title; ?></h1>
 
 			<div class="leadgen-field">
 				
 				<label for="lgf-title" class="leadgen-label"><?php echo $name; ?></label>
 
-				<input type="text" id="lgf-title" class="leadgen-input" value="" tabindex="1" size="20" name="title" />
+				<input type="text" id="lgf-title" class="leadgen-input" value="" tabindex="1" size="20" name="title" placeholder="E.g. John Doe" />
 
 				<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
 					<label id="lgf-title" class="leadgen-label--error"><?php echo $errors['title']; ?></label>
