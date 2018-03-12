@@ -229,7 +229,7 @@ function leadgen_form( $atts ) {
 				( isset( $_POST['leadgen_customer_budget'] ) && !empty( ['leadgen_customer_budget'] ) )
 			) { ?>
 				
-				<label class="leadgen-label--error"><?php echo $errors['form']; ?></label>
+				<label class="leadgen-label--info"><?php echo $errors['form']; ?></label>
 
 			<?php } ?>
 
