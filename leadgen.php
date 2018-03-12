@@ -139,6 +139,8 @@ function leadgen_form( $atts ) {
 		'budget'		=> 'Desired Budget',
 		'budget_max'	=> '4',
 		'message'		=> 'Message',
+		'message_rows'	=> '100',
+		'message_cols'	=> '6',
 		'submit'		=> 'Submit'
 	), $atts ) );
 
@@ -288,7 +290,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-description" class="leadgen-label"><?php echo $message; ?></label>
 				
-				<textarea id="lgf-description" class="leadgen-textarea" tabindex="3" name="description" cols="50" rows="6"></textarea>
+				<textarea id="lgf-description" class="leadgen-textarea" tabindex="3" name="description" cols="<?php echo $message_cols; ?>" rows="<?php echo $message_rows; ?>"></textarea>
 
 			</div>
 			
