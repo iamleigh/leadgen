@@ -161,6 +161,7 @@ function leadgen_form( $atts ) {
 				( empty( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] === '' )
 			) {
 				$errors['form'] = 'Something went wrong with your form. Please, verify and try again.';
+				$errors['class'] = 'leadgen-has_error';
 			}
 			
 			if ( isset( $_POST['title'] ) && $_POST['title'] !== '' ) {
@@ -239,7 +240,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-title" class="leadgen-label"><?php echo $name; ?></label>
 
-				<input type="text" id="lgf-title" class="leadgen-input" value="" tabindex="1" name="title" maxlength="<?php echo $name_max; ?>" />
+				<input type="text" id="lgf-title" class="leadgen-input<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="title" maxlength="<?php echo $name_max; ?>" />
 
 				<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
 					<label id="lgf-title" class="leadgen-label--error"><?php echo $errors['title']; ?></label>
@@ -251,7 +252,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-phone" class="leadgen-label"><?php echo $phone; ?></label>
 				
-				<input type="tel" id="lgf-phone" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_phone" maxlength="<?php echo $phone_max; ?>" />
+				<input type="tel" id="lgf-phone" class="leadgen-input<?php if ( isset( $errors['leadgen_customer_phone'] ) && !empty( $errors['leadgen_customer_phone'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="leadgen_customer_phone" maxlength="<?php echo $phone_max; ?>" />
 				
 				<?php if ( isset( $errors['leadgen_customer_phone'] ) && !empty( $errors['leadgen_customer_phone'] ) ) { ?>
 					<label id="lgf-phone" class="leadgen-label--error"><?php echo $errors['leadgen_customer_phone']; ?></label>
@@ -263,7 +264,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-email" class="leadgen-label"><?php echo $email; ?></label>
 				
-				<input type="email" id="lgf-email" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_email" maxlength="<?php echo $email_max; ?>" />
+				<input type="email" id="lgf-email" class="leadgen-input<?php if ( isset( $errors['leadgen_customer_email'] ) && !empty( $errors['leadgen_customer_email'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="leadgen_customer_email" maxlength="<?php echo $email_max; ?>" />
 				
 				<?php if ( isset( $errors['leadgen_customer_email'] ) && !empty( $errors['leadgen_customer_email'] ) ) { ?>
 					<label id="lgf-email" class="leadgen-label--error"><?php echo $errors['leadgen_customer_email']; ?></label>
@@ -275,7 +276,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-budget" class="leadgen-label"><?php echo $budget; ?></label>
 				
-				<input type="number" id="lgf-budget" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_budget" maxlength="<?php echo $budget_max; ?>" />
+				<input type="number" id="lgf-budget" class="leadgen-input<?php if ( isset( $errors['leadgen_customer_budget'] ) && !empty( $errors['leadgen_customer_budget'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="leadgen_customer_budget" maxlength="<?php echo $budget_max; ?>" />
 				
 				<?php if ( isset( $errors['leadgen_customer_budget'] ) && !empty( $errors['leadgen_customer_budget'] ) ) { ?>
 					<label id="lgf-budget" class="leadgen-label--error"><?php echo $errors['leadgen_customer_budget']; ?></label>
