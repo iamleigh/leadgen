@@ -235,7 +235,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-title" class="leadgen-label"><?php echo $name; ?></label>
 
-				<input type="text" id="lgf-title" class="leadgen-input" value="" tabindex="1" name="title" placeholder="E.g. John Doe" />
+				<input type="text" id="lgf-title" class="leadgen-input" value="" tabindex="1" name="title" maxlength="" />
 
 				<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
 					<label id="lgf-title" class="leadgen-label--error"><?php echo $errors['title']; ?></label>
@@ -247,7 +247,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-phone" class="leadgen-label"><?php echo $phone; ?></label>
 				
-				<input type="tel" id="lgf-phone" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_phone" />
+				<input type="tel" id="lgf-phone" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_phone" maxlength="" />
 				
 				<?php if ( isset( $errors['leadgen_customer_phone'] ) && !empty( $errors['leadgen_customer_phone'] ) ) { ?>
 					<label id="lgf-phone" class="leadgen-label--error"><?php echo $errors['leadgen_customer_phone']; ?></label>
@@ -259,7 +259,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-email" class="leadgen-label"><?php echo $email; ?></label>
 				
-				<input type="email" id="lgf-email" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_email" />
+				<input type="email" id="lgf-email" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_email" maxlength="" />
 				
 				<?php if ( isset( $errors['leadgen_customer_email'] ) && !empty( $errors['leadgen_customer_email'] ) ) { ?>
 					<label id="lgf-email" class="leadgen-label--error"><?php echo $errors['leadgen_customer_email']; ?></label>
@@ -271,7 +271,7 @@ function leadgen_form( $atts ) {
 				
 				<label for="lgf-budget" class="leadgen-label"><?php echo $budget; ?></label>
 				
-				<input type="number" id="lgf-budget" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_budget" />
+				<input type="number" id="lgf-budget" class="leadgen-input" value="" tabindex="1" name="leadgen_customer_budget" maxlength="" />
 				
 				<?php if ( isset( $errors['leadgen_customer_budget'] ) && !empty( $errors['leadgen_customer_budget'] ) ) { ?>
 					<label id="lgf-budget" class="leadgen-label--error"><?php echo $errors['leadgen_customer_budget']; ?></label>
