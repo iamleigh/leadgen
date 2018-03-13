@@ -353,7 +353,17 @@ add_action( 'wp_enqueue_scripts', 'leadgen_load_styles' );
 function leadgen_load_scripts() {
 
 	wp_enqueue_script( 'leadgen', leadgen_plugin_url() . 'assets/js/leadgen.js', array( 'jquery' ) );
+
+	wp_localize_script( 'leadgen-data', 'leadgen', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 	
 }
 
 add_action( 'wp_enqueue_scripts', 'leadgen_load_scripts' );
+
+function function_name_that_called_when_ajax_submit() {
+    $post_data = $_POST;
+    return wp_json_encode($post_data);
+}
+
+add_action( 'wp_ajax_leadgen_new_customer', 'function_name_that_called_when_ajax_submit' );
+add_action( 'wp_ajax_nopriv_leadgen_new_customer', 'function_name_that_called_when_ajax_submit' );
