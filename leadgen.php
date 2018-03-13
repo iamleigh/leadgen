@@ -82,7 +82,7 @@ function leadgen_customer_info() {
 
 }
 
-add_action( 'init', 'leadgen_customer_info' );
+add_action( 'add_meta_boxes', 'leadgen_customer_info' );
 
 function leadgen_customer_info_show( $customer_info ) {
 
