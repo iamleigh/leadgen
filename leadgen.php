@@ -338,7 +338,7 @@ function leadgen_load_scripts() {
 
 	$plugin_url = plugin_dir_url( __FILE__ );
 
-	wp_enqueue_script( 'leadgen', $plugin_url . 'assets/js/leadgen.js', false );
+	wp_enqueue_script( 'leadgen', $plugin_url . 'assets/js/leadgen.js', array( 'jquery' ) );
 	
 }
 
