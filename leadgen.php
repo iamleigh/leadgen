@@ -10,6 +10,22 @@
 
 defined( 'ABSPATH' ) or die( "Now you see me, now you don't... puff!!!" );
 
+// Return plugin URL
+if ( ! function_exists( 'leadgen_plugin_url' ) ) {
+	
+	function leadgen_plugin_url() {
+		return trailingslashit( plugin_dir_url( __FILE__ ) );
+	}
+}
+
+// Return plugin path
+if ( ! function_exists( 'leadgen_plugin_dir' ) ) {
+	
+	function leadgen_plugin_dir() {
+		return trailingslashit( plugin_dir_path( __FILE__ ) );
+	}
+}
+
 // CUSTOMER CPT
 function leadgen_customers() {
 
@@ -326,9 +342,7 @@ add_shortcode( "leadgen", "leadgen_form" );
 
 function leadgen_load_styles() {
 	
-	$plugin_url = plugin_dir_url( __FILE__ );
-	
-	wp_enqueue_style( 'leadgen', $plugin_url . 'assets/css/leadgen.css' );
+	wp_enqueue_style( 'leadgen', leadgen_plugin_url() . 'assets/css/leadgen.css' );
 	
 }
 
@@ -336,9 +350,7 @@ add_action( 'wp_enqueue_scripts', 'leadgen_load_styles' );
 
 function leadgen_load_scripts() {
 
-	$plugin_url = plugin_dir_url( __FILE__ );
-
-	wp_enqueue_script( 'leadgen', $plugin_url . 'assets/js/leadgen.js', array( 'jquery' ) );
+	wp_enqueue_script( 'leadgen', leadgen_plugin_url() . 'assets/js/leadgen.js', array( 'jquery' ) );
 	
 }
 
