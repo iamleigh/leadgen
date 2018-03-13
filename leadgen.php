@@ -8,7 +8,9 @@
  * License:		MIT
  */
 
-defined( 'ABSPATH' ) or die( "Now you see me, now you don't... puff!!!" );
+if ( ! defined( 'ABSPATH' ) ) {
+	die( "Now you see me, now you don't... puff!!!" );
+}
 
 // Return plugin URL
 if ( ! function_exists( 'leadgen_plugin_url' ) ) {
