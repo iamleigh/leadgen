@@ -10,13 +10,15 @@
 			// process the form
 			$.ajax({
 				type		: 'POST',
-				url			: leadgen.ajaxurl,
+				url			: leadgen_data.ajaxurl,
 				data		: data,
 				dataType	: 'json',
 				encode		: true
 			})
 
 			.done(function(data) {
+				
+				$('#leadgen_new_customer').prepend('<label class="leadgen-label--info">' + data.message + '</label>');
 
 				console.log(data);
 

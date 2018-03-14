@@ -31,7 +31,7 @@ if ( ! function_exists( 'leadgen_plugin_dir' ) ) {
 // CUSTOMER CPT
 function leadgen_customers() {
 
-	$labels		= array(
+	$labels = array(
 		'name'					=> 'Customers',
 		'singular_name'			=> 'Customer',
 		'add_new'				=> 'Add New',
@@ -45,13 +45,13 @@ function leadgen_customers() {
 		'not_found_in_trash'	=> 'No customers found in trash'
 	);
 
-	$supports	= array(
+	$supports = array(
 		'title',
 		'editor'
 
 	);
 
-	$args		= array(
+	$args = array(
 		'labels'			=> $labels,
 		'public'			=> true,
 		'menu_icon'			=> null,
@@ -146,7 +146,7 @@ function leadgen_form( $atts ) {
 	$errors = array(); // array to hold validation errors
 	$data	= array(); // array to pass back data
 
-	extract( shortcode_atts( array(
+	$shortcode_atts = shortcode_atts( array(
 		'styles'		=> true,
 		'title'			=> 'Contact Us',
 		'name'			=> 'Name',
@@ -161,89 +161,27 @@ function leadgen_form( $atts ) {
 		'message'		=> 'Message',
 		'message_cols'	=> '100',
 		'message_rows'	=> '6',
-		'submit'		=> 'Submit'
-	), $atts ) );
+		'submit'		=> 'Submit',
+		'ajax'			=> true
+	), $atts );
 
-	if ( 'POST' === $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] === "leadgen_new_customer" ) {
+	extract( $shortcode_atts );
 
-		if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-client' ) ) {
-			
-			print 'Sorry, your nonce did not verify.';
-			
-			exit;
+	if ( $ajax ) {
+
+		wp_enqueue_script( 'leadgen', leadgen_plugin_url() . 'assets/js/leadgen.js', array( 'jquery' ) );
+		wp_localize_script( 'leadgen', 'leadgen_data', array( 'shortcode_atts' => $shortcode_atts, 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+
+	}
+
+	if ( 'POST' === $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_POST['action'] === "leadgen_new_customer" ) {
 		
-		} else {
-			
-			$customer_name = $customer_phone = $customer_email = $customer_budget = $customer_message = '';
-			
-			if (
-				( empty( $_POST['title'] ) && $_POST['title'] === '' ) ||
-				( empty( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] === '' ) ||
-				( empty( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] === '' ) ||
-				( empty( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] === '' )
-			) {
-				$errors['form'] = 'Something went wrong. Please, verify and try again.';
-				$errors['class'] = 'leadgen-has_error';
-			}
-			
-			if ( isset( $_POST['title'] ) && $_POST['title'] !== '' ) {
-				$customer_name =  $_POST['title'];
-			} else {
-				$errors['title'] = '"' . $name . '" is required.';
-			}
-
-			if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] !== '' ) {
-				$customer_phone = $_POST['leadgen_customer_phone'];
-			} else {
-				$errors['leadgen_customer_phone'] = '"' . $phone . '" is required.';
-			}
-
-			if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] !== '' ) {
-				$customer_email = $_POST['leadgen_customer_email'];
-			} else {
-				$errors['leadgen_customer_email'] = '"' . $email . '" is required.';
-			}
-
-			if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] !== '' ) {
-				$customer_budget = $_POST['leadgen_customer_budget'];
-			} else {
-				$errors['leadgen_customer_budget'] = '"' . $budget . '" is required.';
-			}
-			
-			if ( isset( $_POST['description'] ) ) {
-				$customer_message = $_POST['description'];
-			}
-
-			if ( !empty( $customer_name ) && !empty( $customer_phone ) && !empty( $customer_email ) && !empty( $customer_budget ) ) {
-
-				// Add the content of the form to $post as an array
-				$new_client = array(
-					'post_title'				=> $customer_name,
-					'post_content'				=> $customer_message,
-					'leadgen_customer_phone'	=> $customer_phone,
-					'leadgen_customer_email'	=> $customer_email,
-					'leadgen_customer_budget'	=> $customer_budget,
-					'post_status'				=> 'publish',
-					'post_type'					=> 'customers'
-				);
-
-				// Save the new post
-				$pid = wp_insert_post( $new_client );
-			}
-
-			// return a response
-			if ( !empty( $errors ) ) {
-				$data['success']	= false;
-				$data['errors']		= $errors;
-			} else {
-				$data['success']	= true;
-				$data['message']	= 'Success!';
-			}
-
-			echo json_encode( $data );
+		$response = save_new_customer_form();
 		
+		if ( ! $response['success'] ) {
+			$errors = $response['errors'];
 		}
-		
+
 	}
 
 	if ( $styles === true ) {
@@ -272,8 +210,8 @@ function leadgen_form( $atts ) {
 			<div class="leadgen-field">
 				
 				<label for="lgf-title" class="leadgen-label"><?php echo $name; ?></label>
-
-				<input type="text" id="lgf-title" class="leadgen-input<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="title" maxlength="<?php echo $name_max; ?>" />
+				
+				<input type="text" id="lgf-title" class="leadgen-input<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { echo ' ' . $errors['class']; } ?>" value="" tabindex="1" name="title" maxlength="<?php echo $name_max; ?>"/>
 
 				<?php if ( isset( $errors['title'] ) && !empty( $errors['title'] ) ) { ?>
 					<label id="lgf-title" class="leadgen-label--error"><?php echo $errors['title']; ?></label>
@@ -330,8 +268,13 @@ function leadgen_form( $atts ) {
 				<button id="submit" class="leadgen-button" name="submit"><?php echo $submit; ?></button>
 				
 			</div>
+
+			<?php foreach ( $shortcode_atts as $key => $shortcode_att ) { ?>
+                
+				<input type="hidden" name="shortcode_atts[<?php echo $key; ?>]" value="<?php echo $shortcode_att; ?>"/>
+				
+			<?php } ?>
 			
-			<input type="hidden" name="action" value="leadgen_new_customer" />
 			<?php wp_nonce_field( 'leadgen-new-client', 'leadgen_nonce' ); ?>
 
 		</form>
@@ -350,20 +293,109 @@ function leadgen_load_styles() {
 
 add_action( 'wp_enqueue_scripts', 'leadgen_load_styles' );
 
-function leadgen_load_scripts() {
-
-	wp_enqueue_script( 'leadgen', leadgen_plugin_url() . 'assets/js/leadgen.js', array( 'jquery' ) );
-
-	wp_localize_script( 'leadgen', 'leadgen', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+function leadgen_handle_form_submit() {
 	
+	$post_data	= $_POST['form_data'];
+	$response	= save_new_customer_form();
+	
+	if ( ! $response['success'] ) {
+		wp_send_json_error( $response['errors'] );
+	}
+	
+	wp_send_json_success( $post_data['data'] );
+
 }
 
-add_action( 'wp_enqueue_scripts', 'leadgen_load_scripts' );
+function save_new_customer_form() {
 
-function function_name_that_called_when_ajax_submit() {
-    $post_data = $_POST;
-    wp_send_json_success( $post_data );
+	$shortcode_atts = $_POST['shortcode_atts'];
+
+	extract( $shortcode_atts );
+	
+	$errors = array();
+	
+	if ( ! isset( $_POST['leadgen_nonce'] ) || ! wp_verify_nonce( $_POST['leadgen_nonce'], 'leadgen-new-client' ) ) {
+		
+		return array(
+			'success'	=> false,
+			'errors'	=> array(
+				'leadgen_nonce'	=> 'Sorry, your nonce did not verify.',
+			),
+		);
+
+	}
+
+	$customer_name = $customer_phone = $customer_email = $customer_budget = $customer_message = '';
+
+	if (
+		( empty( $_POST['title'] ) && $_POST['title'] === '' ) ||
+		( empty( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] === '' ) ||
+		( empty( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] === '' ) ||
+		( empty( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] === '' )
+	) {
+		$errors['form']  = 'Something went wrong. Please, verify and try again.';
+		$errors['class'] = 'leadgen-has_error';
+	}
+
+	if ( isset( $_POST['title'] ) && $_POST['title'] !== '' ) {
+		$customer_name = $_POST['title'];
+	} else {
+		$errors['title'] = '"' . $name . '" is required.';
+	}
+
+	if ( isset( $_POST['leadgen_customer_phone'] ) && $_POST['leadgen_customer_phone'] !== '' ) {
+		$customer_phone = $_POST['leadgen_customer_phone'];
+	} else {
+		$errors['leadgen_customer_phone'] = '"' . $phone . '" is required.';
+	}
+
+	if ( isset( $_POST['leadgen_customer_email'] ) && $_POST['leadgen_customer_email'] !== '' ) {
+		$customer_email = $_POST['leadgen_customer_email'];
+	} else {
+		$errors['leadgen_customer_email'] = '"' . $email . '" is required.';
+	}
+
+	if ( isset( $_POST['leadgen_customer_budget'] ) && $_POST['leadgen_customer_budget'] !== '' ) {
+		$customer_budget = $_POST['leadgen_customer_budget'];
+	} else {
+		$errors['leadgen_customer_budget'] = '"' . $budget . '" is required.';
+	}
+
+	if ( isset( $_POST['description'] ) ) {
+		$customer_message = $_POST['description'];
+	}
+
+	if ( ! empty( $customer_name ) && ! empty( $customer_phone ) && ! empty( $customer_email ) && ! empty( $customer_budget ) ) {
+
+		// add the content of the form to $post as an array
+		$new_client = array(
+			'post_title'				=> $customer_name,
+			'post_content'				=> $customer_message,
+			'leadgen_customer_phone'	=> $customer_phone,
+			'leadgen_customer_email'	=> $customer_email,
+			'leadgen_customer_budget'	=> $customer_budget,
+			'post_status'				=> 'publish',
+			'post_type'					=> 'customers',
+		);
+
+		// save the new post
+		$pid = wp_insert_post( $new_client );
+
+		// return as sucess
+		return array(
+			'success'	=> true,
+			'data'		=> $pid,
+		);
+	}
+
+
+	// return a response
+	return array(
+		'success'	=> false,
+		'errors'	=> $errors,
+	);
+
 }
 
-add_action( 'wp_ajax_leadgen_new_customer', 'function_name_that_called_when_ajax_submit' );
-add_action( 'wp_ajax_nopriv_leadgen_new_customer', 'function_name_that_called_when_ajax_submit' );
+add_action( 'wp_ajax_leadgen_new_customer', 'leadgen_handle_form_submit' );
+add_action( 'wp_ajax_nopriv_leadgen_new_customer', 'leadgen_handle_form_submit' );
