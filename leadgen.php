@@ -274,6 +274,8 @@ function leadgen_form( $atts ) {
 				<input type="hidden" name="shortcode_atts[<?php echo $key; ?>]" value="<?php echo $shortcode_att; ?>"/>
 				
 			<?php } ?>
+
+			<input type="hidden" name="action" value="leadgen_new_customer" />
 			
 			<?php wp_nonce_field( 'leadgen-new-client', 'leadgen_nonce' ); ?>
 
