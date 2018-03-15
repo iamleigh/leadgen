@@ -30,6 +30,8 @@
 					
 					var $label_class = data.success ? 'success' : 'error';
 
+					notice.find('.leadgen-notice--400').remove();
+
 					if (data.success === false) {
 						
 						notice.find('.leadgen-notice--success').remove();
@@ -156,7 +158,12 @@
 
 					}
 
-					console.log(data);
+				},
+				error		: function() {
+
+					if ( notice.find('.leadgen-notice--400').length === 0 ) {
+						notice.append('<label class="leadgen-notice--400">There was an error on form submission.</label>');
+					}
 
 				}
 			});
