@@ -10,11 +10,26 @@
         font: 400 13px/22px $font;
         letter-spacing: -0.25px;
 
-        &--info,
-        &--notice,
-        &--success,
-        &--loading {
-            height: auto;
+        &--error {
+			display: block;
+			margin: 5px 0 0;
+			padding: 0;
+			border: 0;
+			color: $color-red;
+			font: 400 12px/20px $font;
+			letter-spacing: 0;
+			
+			@include screen("small") {
+				text-align: right;
+			}
+        }
+	}
+	
+	.leadgen-notice {
+
+		&--error,
+		&--success {
+			height: auto;
             opacity: 1;
             cursor: default;
             display: block;
@@ -34,37 +49,18 @@
             &:last-child {
                 margin-bottom: 0;
             }
-        }
+		}
 
-        &--info {
-            background: #F8F8F8;
+		&--error {
+			background: $color-red;
+			color: $color-white;
 
-            &:before {
-                content: "\49";
-                color: #4DA6DE;
-            }
-        }
-
-        &--error {
-			display: block;
-			margin: 5px 0 0;
-			padding: 0;
-			border: 0;
-			color: $color-red;
-			font: 400 12px/20px $font;
-			letter-spacing: 0;
-			
-			@include screen("small") {
-				text-align: right;
+			strong {
+				color: $color-white;
 			}
         }
 
-        &--notice {
-            background: #FFF4D2;
-            color: $color-gray--dark;
-        }
-
-        &--success {
+		&--success {
             background: $color-green;
             color: $color-white;
 
@@ -72,9 +68,5 @@
                 color: $color-white;
             }
         }
-
-        &--loading {
-            background: $color-blue--soft;
-        }
-    }
+	}
 }

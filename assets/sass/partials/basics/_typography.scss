@@ -12,7 +12,8 @@
     }
 
 	.leadgen-title {
-		margin: 20px 0;
+		margin: 0 0 20px;
+		padding: 0;
 		color: $color-gray--dark;
 		font: 400 22px/35px $font;
 		letter-spacing: -0.6px;
@@ -36,7 +37,7 @@
 		}
 
 		@include screen("small") {
-			margin: 30px 0;
+			margin: 0 0 30px;
 			font-size: 30px;
 			line-height: 40px;
 		}
