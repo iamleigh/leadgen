@@ -207,7 +207,7 @@ function leadgen_form( $atts ) {
 
 			<?php if ( $ajax === true ) { ?>
 				
-				<div class="leadgen-response-message"></div>
+				<div class="leadgen-notice"></div>
 
 			<?php } ?>
 
