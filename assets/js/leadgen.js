@@ -29,7 +29,7 @@
 					if ( typeof data.data.title !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-name .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-name').append('<label class="leadgen-label--' + $label_class + '">Name field is required.</label>');
+							form.find('#leadgen-customer-name').append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
 						}
 
 					} else {
@@ -39,7 +39,7 @@
 					if ( typeof data.data.leadgen_customer_phone !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-phone .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-phone').append('<label class="leadgen-label--' + $label_class + '">Phone field is required.</label>');
+							form.find('#leadgen-customer-phone').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
 						}
 
 					} else {
@@ -49,7 +49,7 @@
 					if ( typeof data.data.leadgen_customer_email !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-email .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-email').append('<label class="leadgen-label--' + $label_class + '">Email field is required.</label>');
+							form.find('#leadgen-customer-email').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
 						}
 
 					} else {
@@ -59,7 +59,7 @@
 					if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-budget .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-budget').append('<label class="leadgen-label--' + $label_class + '">Budget field is required.</label>');
+							form.find('#leadgen-customer-budget').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
 						}
 
 					} else {
