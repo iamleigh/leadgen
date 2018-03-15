@@ -70,6 +70,7 @@
 
 						form.find('#leadgen-customer-email .leadgen-label--error').remove();
 						field_email.find('.leadgen-input').removeClass('leadgen-has_error');
+						
 					}
 
 					if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
