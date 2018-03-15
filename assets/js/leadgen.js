@@ -11,7 +11,11 @@
 			var form = $(this),
 				data = $(this).serialize();
 
-			var $target_message	= form.find('.leadgen-response-message');
+			var form_title		= form.find('.leadgen-title'),
+				field_name		= form.find('#leadgen-customer-name'),
+				field_phone		= form.find('#leadgen-customer-phone'),
+				field_email		= form.find('#leadgen-customer-email'),
+				field_budget	= form.find('#leadgen-customer-budget');
 			
 			// process the form
 			$.ajax({
@@ -22,66 +26,64 @@
 				encode		: true,
 				success		: function( data ) {
 					
-					$target_message.html('');
-					
 					var $label_class = data.success ? 'success' : 'error';
 
 					if ( typeof data.data.title !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-name .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-name').append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
+							field_name.append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
 						}
 
-						form.find('#leadgen-customer-name .leadgen-input').addClass('leadgen-has_' + $label_class);
+						field_name.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
 					} else {
 						
 						form.find('#leadgen-customer-name .leadgen-label--error').remove();
-						form.find('#leadgen-customer-name .leadgen-input').removeClass('leadgen-has_error');
+						field_name.find('.leadgen-input').removeClass('leadgen-has_error');
 
 					}
 
 					if ( typeof data.data.leadgen_customer_phone !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-phone .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-phone').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
+							field_phone.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
 						}
 
-						form.find('#leadgen-customer-phone .leadgen-input').addClass('leadgen-has_' + $label_class);
+						field_phone.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
 					} else {
 						
 						form.find('#leadgen-customer-phone .leadgen-label--error').remove();
-						form.find('#leadgen-customer-name .leadgen-input').addClass('leadgen-has_error');
+						field_phone.find('.leadgen-input').removeClass('leadgen-has_error');
 
 					}
 
 					if ( typeof data.data.leadgen_customer_email !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-email .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-email').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
+							field_email.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
 						}
 
-						form.find('#leadgen-customer-email .leadgen-input').addClass('leadgen-has_' + $label_class);
+						field_email.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
 					} else {
 
 						form.find('#leadgen-customer-email .leadgen-label--error').remove();
-						form.find('#leadgen-customer-name .leadgen-input').addClass('leadgen-has_error');
+						field_email.find('.leadgen-input').removeClass('leadgen-has_error');
 					}
 
 					if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
 						
 						if ( form.find('#leadgen-customer-budget .leadgen-label--error').length === 0 ) {
-							form.find('#leadgen-customer-budget').append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
+							field_budget.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
 						}
 
-						form.find('#leadgen-customer-budget .leadgen-input').addClass('leadgen-has_' + $label_class);
+						field_budget.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
 					} else {
 
 						form.find('#leadgen-customer-budget .leadgen-label--error').remove();
-						form.find('#leadgen-customer-name .leadgen-input').addClass('leadgen-has_error');
+						field_budget.find('.leadgen-input').removeClass('leadgen-has_error');
 
 					}
 
