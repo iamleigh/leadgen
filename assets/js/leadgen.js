@@ -16,6 +16,8 @@
 				field_phone		= form.find('#leadgen-customer-phone'),
 				field_email		= form.find('#leadgen-customer-email'),
 				field_budget	= form.find('#leadgen-customer-budget');
+
+			var notice			= form.find('.leadgen-notice');
 			
 			// process the form
 			$.ajax({
@@ -28,76 +30,130 @@
 					
 					var $label_class = data.success ? 'success' : 'error';
 
-					if ( typeof data.data.title !== "undefined" ) {
+					if (data.success === false) {
 						
-						if ( form.find('#leadgen-customer-name .leadgen-label--error').length === 0 ) {
-							field_name.append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
+						notice.find('.leadgen-notice--success').remove();
+
+						if ( notice.find('.leadgen-notice--error').length === 0 ) {
+							notice.append('<label class="leadgen-notice--error">' + data.data.form + '</label>');
 						}
 
-						field_name.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+						if ( typeof data.data.title !== "undefined" ) {
+							
+							if ( form.find('#leadgen-customer-name .leadgen-label--error').length === 0 ) {
+								field_name.append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
+							}
 
-					} else {
-						
-						form.find('#leadgen-customer-name .leadgen-label--error').remove();
-						field_name.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_name.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
-					}
+						} else {
 
-					if ( typeof data.data.leadgen_customer_phone !== "undefined" ) {
-						
-						if ( form.find('#leadgen-customer-phone .leadgen-label--error').length === 0 ) {
-							field_phone.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
+							field_name.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_name.find('.leadgen-label--error').remove();
+
+							if ( typeof data.data.title !== "undefined" ) {
+							
+								if ( form.find('#leadgen-customer-name .leadgen-label--error').length === 0 ) {
+									field_name.append('<label class="leadgen-label--' + $label_class + '">' + data.data.title + '</label>');
+								}
+	
+								field_name.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+	
+							}
+
 						}
 
-						field_phone.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+						if ( typeof data.data.leadgen_customer_phone !== "undefined" ) {
+							
+							if ( form.find('#leadgen-customer-phone .leadgen-label--error').length === 0 ) {
+								field_phone.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
+							}
 
-					} else {
-						
-						form.find('#leadgen-customer-phone .leadgen-label--error').remove();
-						field_phone.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_phone.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
-					}
+						} else {
 
-					if ( typeof data.data.leadgen_customer_email !== "undefined" ) {
-						
-						if ( form.find('#leadgen-customer-email .leadgen-label--error').length === 0 ) {
-							field_email.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
+							field_phone.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_phone.find('.leadgen-label--error').remove();
+							
+							if ( typeof data.data.leadgen_customer_phone !== "undefined" ) {
+							
+								if ( form.find('#leadgen-customer-phone .leadgen-label--error').length === 0 ) {
+									field_phone.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_phone + '</label>');
+								}
+	
+								field_phone.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+	
+							}
+
 						}
 
-						field_email.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+						if ( typeof data.data.leadgen_customer_email !== "undefined" ) {
+							
+							if ( form.find('#leadgen-customer-email .leadgen-label--error').length === 0 ) {
+								field_email.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
+							}
 
-					} else {
+							field_email.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
 
-						form.find('#leadgen-customer-email .leadgen-label--error').remove();
-						field_email.find('.leadgen-input').removeClass('leadgen-has_error');
-						
-					}
+						} else {
 
-					if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
-						
-						if ( form.find('#leadgen-customer-budget .leadgen-label--error').length === 0 ) {
-							field_budget.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
+							field_email.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_email.find('.leadgen-label--error').remove();
+
+							if ( typeof data.data.leadgen_customer_email !== "undefined" ) {
+							
+								if ( form.find('#leadgen-customer-email .leadgen-label--error').length === 0 ) {
+									field_email.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_email + '</label>');
+								}
+	
+								field_email.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+	
+							}
+							
 						}
 
-						field_budget.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+						if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
+							
+							if ( form.find('#leadgen-customer-budget .leadgen-label--error').length === 0 ) {
+								field_budget.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
+							}
+
+							field_budget.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+
+						} else {
+
+							field_budget.find('.leadgen-input').removeClass('leadgen-has_error');
+							field_budget.find('.leadgen-label--error').remove();
+
+							if ( typeof data.data.leadgen_customer_budget !== "undefined" ) {
+							
+								if ( form.find('#leadgen-customer-budget .leadgen-label--error').length === 0 ) {
+									field_budget.append('<label class="leadgen-label--' + $label_class + '">' + data.data.leadgen_customer_budget + '</label>');
+								}
+	
+								field_budget.find('.leadgen-input').addClass('leadgen-has_' + $label_class);
+	
+							}
+
+						}
 
 					} else {
-
-						form.find('#leadgen-customer-budget .leadgen-label--error').remove();
-						field_budget.find('.leadgen-input').removeClass('leadgen-has_error');
-
-					}
-
-					if (data.success === true) {
 						
 						// Reset form
-						if ($this[0]) {
-							$this[0].reset();
+						if (form[0]) {
+							form[0].reset();
 						}
 
-						if (typeof data.data.url !== "undefined") {
-							window.location.href = data.data.url;
+						form.find('.leadgen-notice--error').remove();
+
+						if ( notice.find('.leadgen-notice--success').length === 0 ) {
+							notice.append('<label class="leadgen-notice--success">Your form was submitted successfully.</label>');
 						}
+
+						form.find('.leadgen-label--error').remove();
+						form.find('.leadgen-input').removeClass('leadgen-has_error');
+
 					}
 
 					console.log(data);
