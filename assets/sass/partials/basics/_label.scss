@@ -34,21 +34,13 @@
             cursor: default;
             display: block;
             position: relative;
-            margin: 15px 0;
+            margin: 0 0 20px;
             padding: 14px 15px 12px;
             border-radius: 3px;
             color: $color-gray--light;
             font: 400 13px/20px $font;
             letter-spacing: 0;
             transition: height 0.3s linear, opacity 0.3s ease;
-
-            &:first-child {
-                margin-top: 0;
-            }
-
-            &:last-child {
-                margin-bottom: 0;
-            }
 		}
 
 		&--error {
