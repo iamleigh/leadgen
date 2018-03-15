@@ -190,7 +190,7 @@ function leadgen_form( $atts ) {
 		$class = '';
 	} ?>
 
-	<div id="leadgen-form">
+	<div class="leadgen-customer-info">
 		
 		<form id="leadgen_new_customer"<?php echo $class; ?> name="leadgen_new_customer" method="post" action="">
 

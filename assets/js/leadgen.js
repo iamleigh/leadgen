@@ -2,7 +2,7 @@
 
 	$(document).ready(function() {
 
-		$('#leadgen_new_customer').submit(function(e) {
+		$('.leadgen-custom-info').submit(function(e) {
 
 			// get the form data
             var data = $(this).serialize();
@@ -18,7 +18,7 @@
 
 			.done(function(data) {
 				
-				$('#leadgen_new_customer').prepend('<label class="leadgen-label--info">' + data.message + '</label>');
+				$('.leadgen-customer-info').prepend('<label class="leadgen-label--info">' + data.message + '</label>');
 
 				console.log(data);
 
