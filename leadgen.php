@@ -190,7 +190,7 @@ function leadgen_form( $atts ) {
 		$class = '';
 	} ?>
 
-	<div class="leadgen-customer-info">
+	<div id="leadgen-form">
 		
 		<form id="leadgen_new_customer"<?php echo $class; ?> name="leadgen_new_customer" method="post" action="">
 
@@ -205,9 +205,15 @@ function leadgen_form( $atts ) {
 
 			<?php } ?>
 
+			<?php if ( $ajax === true ) { ?>
+				
+				<div class="leadgen-response-message"></div>
+
+			<?php } ?>
+
 			<h1 class="leadgen-title"><?php echo $title; ?></h1>
 
-			<div class="leadgen-field">
+			<div id="leadgen-customer-name" class="leadgen-field">
 				
 				<label for="lgf-title" class="leadgen-label"><?php echo $name; ?></label>
 				
@@ -219,7 +225,7 @@ function leadgen_form( $atts ) {
 
 			</div>
 
-			<div class="leadgen-field">
+			<div id="leadgen-customer-phone" class="leadgen-field">
 				
 				<label for="lgf-phone" class="leadgen-label"><?php echo $phone; ?></label>
 				
@@ -231,7 +237,7 @@ function leadgen_form( $atts ) {
 
 			</div>
 
-			<div class="leadgen-field">
+			<div id="leadgen-customer-email" class="leadgen-field">
 				
 				<label for="lgf-email" class="leadgen-label"><?php echo $email; ?></label>
 				
@@ -243,7 +249,7 @@ function leadgen_form( $atts ) {
 
 			</div>
 
-			<div class="leadgen-field">
+			<div id="leadgen-customer-budget" class="leadgen-field">
 				
 				<label for="lgf-budget" class="leadgen-label"><?php echo $budget; ?></label>
 				
