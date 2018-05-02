@@ -114,7 +114,8 @@ function leadgen_customer_info_show( $customer_info ) {
 
 	</table>
 
-<?php }
+<?php
+}
 
 function leadgen_customer_info_add( $customer_id, $customer_info ) {
 
@@ -287,7 +288,8 @@ function leadgen_form( $atts ) {
 		
 	</div>
 
-<?php }
+<?php
+}
 
 add_shortcode( "leadgen", "leadgen_form" );
 
