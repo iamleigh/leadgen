@@ -90,28 +90,28 @@ function leadgen_customer_info_show( $customer_info ) {
 	$message = esc_html( get_post_meta( $customer_info->ID, 'message', true ) ); ?>
 
 	<table>
-		
+
 		<tr>
-			
+
 			<td>Phone:</td>
 			<td><input type="number" size="80" name="leadgen_customer_phone" value="<?php echo $phone; ?>" /></td>
-			
+
 		</tr>
 
 		<tr>
-			
+
 			<td>Email:</td>
 			<td><input type="email" size="80" name="leadgen_customer_email" value="<?php echo $email; ?>" /></td>
-			
+
 		</tr>
 
 		<tr>
-			
+
 			<td>Desired Budget:</td>
 			<td><input type="number" size="80" name="leadgen_customer_budget" value="<?php echo $budget; ?>" /></td>
-			
+
 		</tr>
-		
+
 	</table>
 
 <?php }
