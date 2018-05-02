@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:	Lead Gen Form
- * Description:	Collect customer data and build customer profiles inside of your WordPress Dashboard.
- * Version:		1.0
- * Author:		Leighton Sapir
- * Author URI:	http://iamleigh.com/
- * License:		MIT
+ * Plugin Name: Lead Gen Form
+ * Description: Collect customer data and build customer profiles inside of your WordPress Dashboard.
+ * Version: 1.0
+ * Author: Leighton Sapir
+ * Author URI: http://iamleigh.com/
+ * License: MIT
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
