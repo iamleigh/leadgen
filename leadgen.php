@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Return plugin URL
 if ( ! function_exists( 'leadgen_plugin_url' ) ) {
-	
 	function leadgen_plugin_url() {
 		return trailingslashit( plugin_dir_url( __FILE__ ) );
 	}
@@ -22,7 +21,6 @@ if ( ! function_exists( 'leadgen_plugin_url' ) ) {
 
 // Return plugin path
 if ( ! function_exists( 'leadgen_plugin_dir' ) ) {
-	
 	function leadgen_plugin_dir() {
 		return trailingslashit( plugin_dir_path( __FILE__ ) );
 	}
