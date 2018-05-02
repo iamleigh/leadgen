@@ -143,7 +143,7 @@ add_action( 'save_post', 'leadgen_customer_info_add', 10, 2 );
 function leadgen_form( $atts ) {
 
 	$errors = array(); // array to hold validation errors
-	$data	= array(); // array to pass back data
+	$data   = array(); // array to pass back data
 
 	$shortcode_atts = shortcode_atts( array(
 		'styles'       => true,
