@@ -40,12 +40,12 @@ function leadgen_customers() {
 		'view_items'         => 'View Customers',
 		'search_items'       => 'Search Customers',
 		'not_found'          => 'No customers found',
-		'not_found_in_trash' => 'No customers found in trash'
+		'not_found_in_trash' => 'No customers found in trash',
 	);
 
 	$supports = array(
 		'title',
-		'editor'
+		'editor',
 
 	);
 
@@ -160,7 +160,7 @@ function leadgen_form( $atts ) {
 		'message_cols' => '100',
 		'message_rows' => '6',
 		'submit'       => 'Submit',
-		'ajax'         => true
+		'ajax'         => true,
 	), $atts );
 
 	extract( $shortcode_atts );
