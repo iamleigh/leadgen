@@ -30,17 +30,17 @@ if ( ! function_exists( 'leadgen_plugin_dir' ) ) {
 function leadgen_customers() {
 
 	$labels = array(
-		'name'					=> 'Customers',
-		'singular_name'			=> 'Customer',
-		'add_new'				=> 'Add New',
-		'add_new_item'			=> 'Add New Customer',
-		'edit_item'				=> 'Edit Customer',
-		'new_item'				=> 'New Customer',
-		'view_item'				=> 'View Customer',
-		'view_items'			=> 'View Customers',
-		'search_items'			=> 'Search Customers',
-		'not_found'				=> 'No customers found',
-		'not_found_in_trash'	=> 'No customers found in trash'
+		'name'               => 'Customers',
+		'singular_name'      => 'Customer',
+		'add_new'            => 'Add New',
+		'add_new_item'       => 'Add New Customer',
+		'edit_item'          => 'Edit Customer',
+		'new_item'           => 'New Customer',
+		'view_item'          => 'View Customer',
+		'view_items'         => 'View Customers',
+		'search_items'       => 'Search Customers',
+		'not_found'          => 'No customers found',
+		'not_found_in_trash' => 'No customers found in trash'
 	);
 
 	$supports = array(
@@ -50,14 +50,14 @@ function leadgen_customers() {
 	);
 
 	$args = array(
-		'labels'			=> $labels,
-		'public'			=> true,
-		'menu_icon'			=> null,
-		'rewrite'			=> array( 'slug' => 'customer' ),
-		'capability_type'	=> 'post',
-		'has_archive'		=> false,
-		'menu_position'		=> '15',
-		'supports'			=> $supports,
+		'labels'          => $labels,
+		'public'          => true,
+		'menu_icon'       => null,
+		'rewrite'         => array( 'slug' => 'customer' ),
+		'capability_type' => 'post',
+		'has_archive'     => false,
+		'menu_position'   => '15',
+		'supports'        => $supports,
 	);
 
 	register_post_type( 'customers', $args );
@@ -84,10 +84,10 @@ add_action( 'add_meta_boxes', 'leadgen_customer_info' );
 
 function leadgen_customer_info_show( $customer_info ) {
 
-	$phone		= esc_html( get_post_meta( $customer_info->ID, 'phone', true ) );
-	$email		= esc_html( get_post_meta( $customer_info->ID, 'email', true ) );
-	$budget		= esc_html( get_post_meta( $customer_info->ID, 'budget', true ) );
-	$message	= esc_html( get_post_meta( $customer_info->ID, 'message', true ) ); ?>
+	$phone   = esc_html( get_post_meta( $customer_info->ID, 'phone', true ) );
+	$email   = esc_html( get_post_meta( $customer_info->ID, 'email', true ) );
+	$budget  = esc_html( get_post_meta( $customer_info->ID, 'budget', true ) );
+	$message = esc_html( get_post_meta( $customer_info->ID, 'message', true ) ); ?>
 
 	<table>
 		
@@ -145,22 +145,22 @@ function leadgen_form( $atts ) {
 	$data	= array(); // array to pass back data
 
 	$shortcode_atts = shortcode_atts( array(
-		'styles'		=> true,
-		'title'			=> 'Contact Us',
-		'name'			=> 'Name',
-		'name_max'		=> '20',
-		'phone'			=> 'Phone',
-		'phone_max'		=> '10',
-		'email'			=> 'Email',
-		'email_max'		=> '',
-		'budget'		=> 'Desired Budget',
-		'budget_min'	=> '100',
-		'budget_max'	=> '1000',
-		'message'		=> 'Message',
-		'message_cols'	=> '100',
-		'message_rows'	=> '6',
-		'submit'		=> 'Submit',
-		'ajax'			=> true
+		'styles'       => true,
+		'title'        => 'Contact Us',
+		'name'         => 'Name',
+		'name_max'     => '20',
+		'phone'        => 'Phone',
+		'phone_max'    => '10',
+		'email'        => 'Email',
+		'email_max'    => '',
+		'budget'       => 'Desired Budget',
+		'budget_min'   => '100',
+		'budget_max'   => '1000',
+		'message'      => 'Message',
+		'message_cols' => '100',
+		'message_rows' => '6',
+		'submit'       => 'Submit',
+		'ajax'         => true
 	), $atts );
 
 	extract( $shortcode_atts );
