@@ -5,8 +5,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	grunt.initConfig({
 
@@ -47,27 +45,12 @@ module.exports = function (grunt) {
 			}
 		},
 
-		jshint: {
-			gruntfile: ['Gruntfile.js'],
-			dist: {
-				src: ['assets/js/admin/**/*.js']
-			}
-		},
-
 		watch: {
 			sass: {
 				files: ['**/*.scss'],
 				tasks: ['sass', 'autoprefixer', 'cssmin'],
 				options: {
 					spawn: false
-				}
-			},
-			js: {
-				files: ['assets/**/*.js'],
-				tasks: ['leadgen'],
-				options: {
-					spawn: false,
-					atBegin: true
 				}
 			}
 		},
